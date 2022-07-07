@@ -5,9 +5,27 @@ import {
   MinusCircleIcon,
   PlusCircleIcon,
 } from "react-native-heroicons/outline";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToBasket,
+  RemoveBasket,
+  selectBasketItemWithID,
+  selectorBasket,
+} from "../../../redux/basket/basket.slice";
 
-const Dishes = ({ item: { name, price, short_description, image, id } }) => {
+const Dishes = ({ item }) => {
+  const { name, price, short_description, image, id } = item;
   const [pressed, setPressed] = React.useState(false);
+  const basket = useSelector((state) => selectBasketItemWithID(state, id));
+  const dispatch = useDispatch();
+  console.log("filter bucker", basket);
+  const addItemToBasket = () => {
+    //! if item is already in basket, increase quantity
+    dispatch(addToBasket(item));
+  };
+  const removeItemFromBasket = () => {
+    dispatch(RemoveBasket(item));
+  };
 
   return (
     <>
@@ -40,13 +58,13 @@ const Dishes = ({ item: { name, price, short_description, image, id } }) => {
         <View className="bg-white pt-3 px-2  ">
           <View className="flex-row items-center  space-x-2 pb-4">
             {/* decrement */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={removeItemFromBasket}>
               <MinusCircleIcon color="#00CCBB" size={30} />
             </TouchableOpacity>
             {/* quantity */}
-            <Text>{0}</Text>
+            <Text>{basket || 0}</Text>
             {/* increase */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={addItemToBasket}>
               <PlusCircleIcon color="#00CCBB" size={30} />
             </TouchableOpacity>
           </View>

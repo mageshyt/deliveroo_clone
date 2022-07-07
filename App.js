@@ -5,19 +5,20 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import RestaurantScreen from "./screens/RestaurantScreen";
-import { useLayoutEffect } from "react";
-
+import { Provider } from "react-redux";
 const Stack = createNativeStackNavigator();
-
+import { store } from "./redux/store";
 export default function App() {
   return (
     <NavigationContainer>
-      <TailwindProvider>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Restaurant" component={RestaurantScreen} />
-        </Stack.Navigator>
-      </TailwindProvider>
+      <Provider store={store}>
+        <TailwindProvider>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+          </Stack.Navigator>
+        </TailwindProvider>
+      </Provider>
     </NavigationContainer>
   );
 }
