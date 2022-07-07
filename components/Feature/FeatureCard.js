@@ -3,7 +3,7 @@ import React from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCard from "./RestaurantCard";
 
-const FeatureCard = ({ title, description, id }) => {
+const FeatureCard = ({ title, description, id, restaurants }) => {
   return (
     <View>
       <View className="flex-row px-4  items-center justify-between mt-5">
@@ -19,44 +19,11 @@ const FeatureCard = ({ title, description, id }) => {
           paddingHorizontal: 15,
         }}
         showsHorizontalScrollIndicator={false}
-        className="pt-5 "
+        className="pt-4 pb-1 "
       >
-        <RestaurantCard
-          id={id}
-          imgUrl="https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Tikka-Masala-min-600x600.jpg"
-          name="Restaurant 1"
-          genre="Italian"
-          address="123 Main St"
-          short_description="This is a short description"
-          dishes="Dishes: 1, 2, 3"
-          long={-122.4}
-          lat={37.7}
-          rating={4}
-        />
-        <RestaurantCard
-          id={id}
-          imgUrl="https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Tikka-Masala-min-600x600.jpg"
-          name="Restaurant 1"
-          genre="Italian"
-          address="123 Main St"
-          short_description="This is a short description"
-          dishes="Dishes: 1, 2, 3"
-          long={-122.4}
-          lat={37.7}
-          rating={4}
-        />
-        <RestaurantCard
-          id={id}
-          imgUrl="https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Tikka-Masala-min-600x600.jpg"
-          name="Restaurant 1"
-          genre="Italian"
-          address="123 Main St"
-          short_description="This is a short description"
-          dishes="Dishes: 1, 2, 3"
-          long={-122.4}
-          lat={37.7}
-          rating={4}
-        />
+        {restaurants?.map((restaurant, index) => {
+          return <RestaurantCard key={index} {...restaurant} />;
+        })}
       </ScrollView>
     </View>
   );
