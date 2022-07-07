@@ -1,15 +1,10 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image, ScrollView, TouchableOpacity, Text } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
-import { ArrowCircleLeftIcon } from "react-native-heroicons/outline";
+
+import InfoCard from "../components/Restaurant components/InfoCard";
+import DishesRow from "../components/Restaurant components/DishesRow/DishesRow";
 
 const RestaurantScreen = () => {
   const { params: props } = useRoute();
@@ -21,7 +16,6 @@ const RestaurantScreen = () => {
     });
   }, [navigation]);
 
-  console.log("props", props);
   return (
     <ScrollView>
       <View className="relative">
@@ -37,10 +31,20 @@ const RestaurantScreen = () => {
         </TouchableOpacity>
       </View>
       {/* Details */}
-      <View className="bg-white">
-        <View className="px-t pt-4">
-          <Text className="text-3xl font-bold">{props?.name}</Text>
-        </View>
+      <View className="bg-white p-2">
+        <InfoCard
+          name={props?.name}
+          rating={props?.rating}
+          genre={props?.genre}
+          address={props?.address}
+          Description={props?.short_description}
+        />
+      </View>
+
+      <View>
+        <Text className="px-4 pt-6 mb-3 font-bold text-xl">Menu</Text>
+        {/* Dish Row */}
+        <DishesRow items={props?.dishes} />
       </View>
     </ScrollView>
   );
