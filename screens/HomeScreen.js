@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../components/Header/Header";
 import Category from "../components/category/Category";
+import FeatureRow from "../components/Feature/FeatureRow";
 const HomeScreen = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
@@ -17,7 +18,10 @@ const HomeScreen = () => {
       <Header />
       {/* Body -> categories */}
       <ScrollView className="bg-gray-100">
+        {/* items - categories */}
         <Category />
+        {/* Feature row */}
+        <FeatureRow />
       </ScrollView>
     </SafeAreaView>
   );
